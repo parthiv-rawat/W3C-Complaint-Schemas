@@ -1,0 +1,373 @@
+{
+    "$id": "unique-provisional-certificate-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Provisional Certificate",
+    "description": "A standardized format for a provisional certificate, temporarily certifying a student's completion of academic requirements until the final certificate is issued.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The starting date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          },
+          "certificateTitle": {
+            "type": "string",
+            "description": "Title of the certificate (e.g., 'Provisional Certificate')."
+          },
+          "schoolInformation": {
+            "type": "object",
+            "properties": {
+              "schoolName": {
+                "type": "string",
+                "description": "Name of the school."
+              },
+              "schoolLogoOrEmblem": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo or emblem."
+              },
+              "schoolAddress": {
+                "type": "string",
+                "description": "Address of the school."
+              },
+              "contactInformation": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number of the school."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address of the school."
+                  },
+                  "websiteURL": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Website URL of the school."
+                  }
+                },
+                "required": ["phoneNumber", "email"]
+              },
+              "affiliationInformation": {
+                "type": "string",
+                "description": "Affiliation details (if applicable)."
+              },
+              "boardOfEducation": {
+                "type": "string",
+                "description": "Board of Education (e.g., CBSE, ICSE, State Board)."
+              },
+              "affiliationNumberOrAccreditationDetails": {
+                "type": "string",
+                "description": "Affiliation number or accreditation details."
+              }
+            },
+            "required": [
+              "schoolName",
+              "schoolAddress",
+              "contactInformation",
+              "boardOfEducation"
+            ]
+          },
+          "studentInformation": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of birth of the student."
+              },
+              "gender": {
+                "type": "string",
+                "enum": ["Male", "Female", "Other"],
+                "description": "Gender of the student (optional)."
+              },
+              "admissionNumberOrRollNumberOrStudentID": {
+                "type": "string",
+                "description": "Admission number, roll number, or student ID."
+              },
+              "classOrGradeLastAttended": {
+                "type": "string",
+                "description": "Class or grade last attended by the student."
+              },
+              "section": {
+                "type": "string",
+                "description": "Section of the class (if applicable)."
+              },
+              "mothersName": {
+                "type": "string",
+                "description": "Mother's name."
+              },
+              "fathersOrGuardiansName": {
+                "type": "string",
+                "description": "Father's or guardian's name."
+              }
+            },
+            "required": [
+              "fullName",
+              "dateOfBirth",
+              "admissionNumberOrRollNumberOrStudentID",
+              "classOrGradeLastAttended",
+              "mothersName",
+              "fathersOrGuardiansName"
+            ]
+          },
+          "certificationStatement": {
+            "type": "string",
+            "description": "Formal statement certifying completion."
+          },
+          "purposeOfCertificate": {
+            "type": "string",
+            "description": "Purpose of issuing the provisional certificate."
+          },
+          "completionStatus": {
+            "type": "string",
+            "description": "Completion status (e.g., 'Has successfully completed all academic requirements')."
+          },
+          "academicDetails": {
+            "type": "object",
+            "properties": {
+              "classOrGradeLastStudied": {
+                "type": "string",
+                "description": "Class or grade in which the student last studied."
+              },
+              "academicYearOrSession": {
+                "type": "string",
+                "description": "Academic year or session (e.g., 2023–2024)."
+              },
+              "dateOfCompletion": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of completion."
+              },
+              "resultOrStatus": {
+                "type": "string",
+                "description": "Result or status (e.g., 'Promoted', 'Passed')."
+              },
+              "subjectsStudied": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of subjects studied (optional)."
+              }
+            },
+            "required": [
+              "classOrGradeLastStudied",
+              "academicYearOrSession",
+              "dateOfCompletion",
+              "resultOrStatus"
+            ]
+          },
+          "attendanceRecord": {
+            "type": "object",
+            "properties": {
+              "totalWorkingDays": {
+                "type": "integer",
+                "description": "Total number of working days."
+              },
+              "totalDaysPresent": {
+                "type": "integer",
+                "description": "Total days the student was present."
+              },
+              "attendancePercentage": {
+                "type": "number",
+                "description": "Percentage of attendance."
+              }
+            }
+          },
+          "conductAndDiscipline": {
+            "type": "object",
+            "properties": {
+              "generalConduct": {
+                "type": "string",
+                "description": "General conduct (e.g., Excellent, Good, Satisfactory)."
+              },
+              "disciplineRecord": {
+                "type": "string",
+                "description": "Discipline record (optional)."
+              }
+            },
+            "required": ["generalConduct"]
+          },
+          "dateAndPlace": {
+            "type": "object",
+            "properties": {
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of issue of the certificate."
+              },
+              "placeOfIssue": {
+                "type": "string",
+                "description": "Place of issue (City, State)."
+              }
+            },
+            "required": ["dateOfIssue", "placeOfIssue"]
+          },
+          "signatoryDetails": {
+            "type": "object",
+            "properties": {
+              "issuingAuthorityName": {
+                "type": "string",
+                "description": "Name of the issuing authority."
+              },
+              "issuingAuthorityDesignation": {
+                "type": "string",
+                "description": "Designation of the issuing authority (e.g., Principal)."
+              },
+              "signatureOfIssuingAuthority": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the signature of the issuing authority."
+              },
+              "schoolSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's seal or stamp."
+              }
+            },
+            "required": [
+              "issuingAuthorityName",
+              "issuingAuthorityDesignation",
+              "signatureOfIssuingAuthority",
+              "schoolSealOrStamp"
+            ]
+          },
+          "verificationDetails": {
+            "type": "object",
+            "properties": {
+              "certificateNumberOrID": {
+                "type": "string",
+                "description": "Certificate number or unique reference ID."
+              },
+              "qrCodeOrBarcode": {
+                "type": "string",
+                "format": "uri",
+                "description": "QR code or barcode for online verification."
+              },
+              "verificationURL": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for online verification."
+              }
+            }
+          },
+          "additionalInformation": {
+            "type": "object",
+            "properties": {
+              "furtherInstructions": {
+                "type": "string",
+                "description": "Further instructions (e.g., validity period of the provisional certificate)."
+              },
+              "specialRemarks": {
+                "type": "string",
+                "description": "Special remarks (optional)."
+              },
+              "expiryDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Expiry date of the provisional certificate (if applicable)."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "certificateTitle",
+          "schoolInformation",
+          "studentInformation",
+          "certificationStatement",
+          "purposeOfCertificate",
+          "completionStatus",
+          "academicDetails",
+          "conductAndDiscipline",
+          "dateAndPlace",
+          "signatoryDetails"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  

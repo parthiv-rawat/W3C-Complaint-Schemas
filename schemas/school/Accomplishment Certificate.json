@@ -1,0 +1,351 @@
+{
+    "$id": "unique-accomplishment-certificate-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Accomplishment Certificate",
+    "description": "A standardized format for an accomplishment certificate, recognizing a student's specific achievement or contribution.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          },
+          "certificateTitle": {
+            "type": "string",
+            "description": "Title of the certificate (e.g., 'Certificate of Accomplishment')."
+          },
+          "schoolOrOrganizationInformation": {
+            "type": "object",
+            "properties": {
+              "organizationName": {
+                "type": "string",
+                "description": "Name of the school or organizing body."
+              },
+              "organizationLogoOrEmblem": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo or emblem."
+              },
+              "organizationAddress": {
+                "type": "string",
+                "description": "Address of the school."
+              },
+              "contactInformation": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address."
+                  },
+                  "websiteURL": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Website URL."
+                  }
+                },
+                "required": ["phoneNumber", "email"]
+              },
+              "affiliationInformation": {
+                "type": "string",
+                "description": "Affiliation information (if applicable)."
+              },
+              "boardOfEducation": {
+                "type": "string",
+                "description": "Board of Education (e.g., CBSE, ICSE, State Board)."
+              },
+              "accreditationDetails": {
+                "type": "string",
+                "description": "Accreditation details (optional)."
+              }
+            },
+            "required": [
+              "organizationName",
+              "organizationAddress",
+              "contactInformation",
+              "boardOfEducation"
+            ]
+          },
+          "recipientInformation": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "classOrGrade": {
+                "type": "string",
+                "description": "Class or grade of the student."
+              },
+              "section": {
+                "type": "string",
+                "description": "Section (if applicable)."
+              },
+              "rollNumberOrStudentID": {
+                "type": "string",
+                "description": "Roll number or student ID (optional)."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of birth (optional)."
+              },
+              "studentPhotograph": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the student's photograph (optional)."
+              }
+            },
+            "required": ["fullName", "classOrGrade"]
+          },
+          "accomplishmentDetails": {
+            "type": "object",
+            "properties": {
+              "accomplishmentName": {
+                "type": "string",
+                "description": "Name of the accomplishment or achievement."
+              },
+              "achievementDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Date(s) of the achievement."
+              },
+              "descriptionOfAchievement": {
+                "type": "string",
+                "description": "Description of the achievement (optional)."
+              },
+              "levelOfAccomplishment": {
+                "type": "string",
+                "description": "Level of accomplishment.",
+                "enum": [
+                  "School Level",
+                  "District Level",
+                  "State Level",
+                  "National Level",
+                  "International Level"
+                ]
+              },
+              "positionOrRank": {
+                "type": "string",
+                "description": "Position or rank (if applicable)."
+              }
+            },
+            "required": ["accomplishmentName", "achievementDate", "levelOfAccomplishment"]
+          },
+          "certificationStatement": {
+            "type": "string",
+            "description": "Formal wording recognizing the achievement."
+          },
+          "purposeOfCertificate": {
+            "type": "string",
+            "description": "Purpose of issuing the certificate."
+          },
+          "dateAndPlace": {
+            "type": "object",
+            "properties": {
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of issue of the certificate."
+              },
+              "placeOfIssue": {
+                "type": "string",
+                "description": "Place of issue (City, State)."
+              }
+            },
+            "required": ["dateOfIssue", "placeOfIssue"]
+          },
+          "signatoryDetails": {
+            "type": "object",
+            "properties": {
+              "signatoryName": {
+                "type": "string",
+                "description": "Name of the signatory."
+              },
+              "signatoryDesignation": {
+                "type": "string",
+                "description": "Designation of the signatory."
+              },
+              "signatorySignature": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the signatory's signature."
+              },
+              "additionalSignatories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the additional signatory."
+                    },
+                    "designation": {
+                      "type": "string",
+                      "description": "Designation of the additional signatory."
+                    },
+                    "signature": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL of the additional signatory's signature."
+                    }
+                  },
+                  "required": ["name", "designation"]
+                },
+                "description": "List of additional signatories (optional)."
+              },
+              "officialSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the official seal or stamp of the school."
+              }
+            },
+            "required": [
+              "signatoryName",
+              "signatoryDesignation",
+              "signatorySignature",
+              "officialSealOrStamp"
+            ]
+          },
+          "verificationDetails": {
+            "type": "object",
+            "properties": {
+              "certificateNumberOrID": {
+                "type": "string",
+                "description": "Certificate number or unique reference ID."
+              },
+              "qrCodeOrBarcode": {
+                "type": "string",
+                "format": "uri",
+                "description": "QR code or barcode for online verification."
+              },
+              "verificationURL": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for online verification."
+              }
+            }
+          },
+          "additionalElements": {
+            "type": "object",
+            "properties": {
+              "schoolMottoOrTagline": {
+                "type": "string",
+                "description": "School motto or tagline (optional)."
+              },
+              "inspirationalQuotesOrMessages": {
+                "type": "string",
+                "description": "Inspirational quotes or messages (optional)."
+              },
+              "logosOfSponsorsOrPartners": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "URL of the sponsor or partner organization's logo."
+                },
+                "description": "Logos of sponsors or partner organizations (if applicable)."
+              },
+              "backgroundGraphicsOrWatermarks": {
+                "type": "string",
+                "description": "Background graphics or watermarks related to the theme of accomplishment."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "certificateTitle",
+          "schoolOrOrganizationInformation",
+          "recipientInformation",
+          "accomplishmentDetails",
+          "certificationStatement",
+          "purposeOfCertificate",
+          "dateAndPlace",
+          "signatoryDetails"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  

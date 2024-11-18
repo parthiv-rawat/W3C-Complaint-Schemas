@@ -1,0 +1,351 @@
+{
+    "$id": "unique-participation-certificate-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Participation Certificate",
+    "description": "A standardized format for a participation certificate, acknowledging a student's participation in an event or activity.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The starting date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          },
+          "certificateTitle": {
+            "type": "string",
+            "description": "Title of the certificate (e.g., 'Certificate of Participation')."
+          },
+          "schoolOrOrganizationInformation": {
+            "type": "object",
+            "properties": {
+              "organizationName": {
+                "type": "string",
+                "description": "Name of the school or organizing body."
+              },
+              "organizationLogoOrEmblem": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo or emblem."
+              },
+              "organizationAddress": {
+                "type": "string",
+                "description": "Address of the school or organization."
+              },
+              "contactDetails": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address."
+                  },
+                  "websiteURL": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Website URL."
+                  }
+                },
+                "required": ["phoneNumber", "email"]
+              },
+              "affiliationDetails": {
+                "type": "string",
+                "description": "Affiliation details (if applicable)."
+              },
+              "boardOfEducation": {
+                "type": "string",
+                "description": "Board of Education (e.g., CBSE, ICSE, State Board)."
+              },
+              "accreditationInformation": {
+                "type": "string",
+                "description": "Accreditation information."
+              }
+            },
+            "required": [
+              "organizationName",
+              "organizationAddress",
+              "contactDetails"
+            ]
+          },
+          "participantInformation": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "classOrGrade": {
+                "type": "string",
+                "description": "Class or grade of the student."
+              },
+              "section": {
+                "type": "string",
+                "description": "Section (if applicable)."
+              },
+              "rollNumberOrStudentID": {
+                "type": "string",
+                "description": "Roll number or student ID (optional)."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of birth (optional)."
+              },
+              "studentPhotograph": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the student's photograph (optional)."
+              }
+            },
+            "required": ["fullName", "classOrGrade"]
+          },
+          "eventOrActivityDetails": {
+            "type": "object",
+            "properties": {
+              "eventName": {
+                "type": "string",
+                "description": "Name of the event or activity."
+              },
+              "eventDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Date(s) of the event."
+              },
+              "venue": {
+                "type": "string",
+                "description": "Venue of the event (if different from the school)."
+              },
+              "eventDescription": {
+                "type": "string",
+                "description": "Description of the event (optional)."
+              },
+              "levelOfParticipation": {
+                "type": "string",
+                "description": "Level of participation.",
+                "enum": ["School Level", "District Level", "State Level", "National Level"]
+              },
+              "roleOrPosition": {
+                "type": "string",
+                "description": "Role or position (e.g., Participant, Volunteer, Team Leader)."
+              }
+            },
+            "required": ["eventName", "eventDate"]
+          },
+          "certificationStatement": {
+            "type": "string",
+            "description": "Formal wording acknowledging participation."
+          },
+          "purposeOfCertificate": {
+            "type": "string",
+            "description": "Purpose of the certificate."
+          },
+          "specialAchievementsOrContributions": {
+            "type": "string",
+            "description": "Special achievements or contributions (optional)."
+          },
+          "dateAndPlace": {
+            "type": "object",
+            "properties": {
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of issue of the certificate."
+              },
+              "placeOfIssue": {
+                "type": "string",
+                "description": "Place of issue (City, State)."
+              }
+            },
+            "required": ["dateOfIssue", "placeOfIssue"]
+          },
+          "signatoryDetails": {
+            "type": "object",
+            "properties": {
+              "signatoryName": {
+                "type": "string",
+                "description": "Name of the signatory."
+              },
+              "signatoryDesignation": {
+                "type": "string",
+                "description": "Designation of the signatory."
+              },
+              "signatorySignature": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the signatory's signature."
+              },
+              "additionalSignatories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the additional signatory."
+                    },
+                    "designation": {
+                      "type": "string",
+                      "description": "Designation of the additional signatory."
+                    },
+                    "signature": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL of the additional signatory's signature."
+                    }
+                  },
+                  "required": ["name", "designation"]
+                },
+                "description": "List of additional signatories (optional)."
+              },
+              "officialSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the official seal or stamp of the school."
+              }
+            },
+            "required": [
+              "signatoryName",
+              "signatoryDesignation",
+              "signatorySignature"
+            ]
+          },
+          "verificationDetails": {
+            "type": "object",
+            "properties": {
+              "certificateNumberOrID": {
+                "type": "string",
+                "description": "Certificate number or ID."
+              },
+              "qrCodeOrBarcode": {
+                "type": "string",
+                "format": "uri",
+                "description": "QR code or barcode for verification."
+              },
+              "verificationURL": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for online verification."
+              }
+            }
+          },
+          "additionalElements": {
+            "type": "object",
+            "properties": {
+              "schoolMottoOrTagline": {
+                "type": "string",
+                "description": "School motto or tagline (optional)."
+              },
+              "inspirationalQuotesOrMessages": {
+                "type": "string",
+                "description": "Inspirational quotes or messages (optional)."
+              },
+              "logosOfSponsorsOrPartners": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "URL of the sponsor or partner organization's logo."
+                },
+                "description": "Logos of sponsors or partner organizations (if applicable)."
+              },
+              "backgroundGraphicsOrWatermarks": {
+                "type": "string",
+                "description": "Background graphics or watermarks related to the event theme."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "certificateTitle",
+          "schoolOrOrganizationInformation",
+          "participantInformation",
+          "eventOrActivityDetails",
+          "certificationStatement",
+          "purposeOfCertificate",
+          "dateAndPlace",
+          "signatoryDetails"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  

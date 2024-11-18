@@ -1,0 +1,566 @@
+{
+    "$id": "unique-marksheet-card-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Marksheet Card",
+    "description": "A standardized format for a student's marksheet, detailing academic performance, attendance, and other relevant information.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or marksheet."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the marksheet."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the marksheet."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The date from which the marksheet is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date of the marksheet (if applicable)."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the student."
+          },
+          "studentInformation": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "admissionNumberOrRollNumberOrStudentID": {
+                "type": "string",
+                "description": "Admission number, roll number, or student ID."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of birth of the student."
+              },
+              "gender": {
+                "type": "string",
+                "enum": ["Male", "Female", "Other"],
+                "description": "Gender of the student."
+              },
+              "classOrGrade": {
+                "type": "string",
+                "description": "Current class or grade of the student."
+              },
+              "section": {
+                "type": "string",
+                "description": "Section of the class (if applicable)."
+              },
+              "academicYearOrSession": {
+                "type": "string",
+                "description": "Academic year or session (e.g., 2023–2024)."
+              },
+              "studentPhoto": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the student's photo (optional)."
+              },
+              "mothersName": {
+                "type": "string",
+                "description": "Mother's name (optional)."
+              },
+              "fathersOrGuardiansName": {
+                "type": "string",
+                "description": "Father's or guardian's name (optional)."
+              }
+            },
+            "required": [
+              "fullName",
+              "admissionNumberOrRollNumberOrStudentID",
+              "dateOfBirth",
+              "gender",
+              "classOrGrade",
+              "academicYearOrSession"
+            ]
+          },
+          "schoolInformation": {
+            "type": "object",
+            "properties": {
+              "schoolName": {
+                "type": "string",
+                "description": "Name of the school."
+              },
+              "schoolLogoOrEmblem": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo or emblem."
+              },
+              "schoolAddress": {
+                "type": "string",
+                "description": "Address of the school."
+              },
+              "schoolContactDetails": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number of the school."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address of the school."
+                  },
+                  "website": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Website of the school."
+                  }
+                },
+                "required": ["phoneNumber", "email"]
+              },
+              "affiliationNumber": {
+                "type": "string",
+                "description": "Affiliation number (if applicable)."
+              },
+              "boardOfEducation": {
+                "type": "string",
+                "description": "Board of Education (e.g., CBSE, ICSE, State Board)."
+              },
+              "principalsName": {
+                "type": "string",
+                "description": "Name of the principal."
+              }
+            },
+            "required": [
+              "schoolName",
+              "schoolAddress",
+              "schoolContactDetails",
+              "boardOfEducation",
+              "principalsName"
+            ]
+          },
+          "examinationDetails": {
+            "type": "object",
+            "properties": {
+              "examinationName": {
+                "type": "string",
+                "description": "Name of the examination (e.g., Mid-Term, Final Exam)."
+              },
+              "termOrSemester": {
+                "type": "string",
+                "description": "Term or semester (if applicable)."
+              },
+              "examinationDates": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Start date of the examination."
+                  },
+                  "end": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "End date of the examination."
+                  }
+                },
+                "required": ["start", "end"]
+              },
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of issue of the marksheet."
+              }
+            },
+            "required": [
+              "examinationName",
+              "examinationDates",
+              "dateOfIssue"
+            ]
+          },
+          "subjectWisePerformance": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "subjectCode": {
+                  "type": "string",
+                  "description": "Subject code (optional)."
+                },
+                "subjectName": {
+                  "type": "string",
+                  "description": "Name of the subject."
+                },
+                "maximumMarks": {
+                  "type": "number",
+                  "description": "Maximum marks for the subject."
+                },
+                "marksObtained": {
+                  "type": "number",
+                  "description": "Marks obtained in the subject."
+                },
+                "grade": {
+                  "type": "string",
+                  "description": "Grade awarded (if grading system is used)."
+                },
+                "gradePoint": {
+                  "type": "number",
+                  "description": "Grade point (if applicable)."
+                },
+                "credits": {
+                  "type": "number",
+                  "description": "Credits for the subject (for higher classes)."
+                },
+                "remarks": {
+                  "type": "string",
+                  "description": "Remarks (optional)."
+                }
+              },
+              "required": [
+                "subjectName",
+                "maximumMarks",
+                "marksObtained"
+              ]
+            },
+            "description": "List of subjects with performance details."
+          },
+          "aggregatePerformance": {
+            "type": "object",
+            "properties": {
+              "totalMaximumMarks": {
+                "type": "number",
+                "description": "Total maximum marks."
+              },
+              "totalMarksObtained": {
+                "type": "number",
+                "description": "Total marks obtained."
+              },
+              "percentageScore": {
+                "type": "number",
+                "description": "Percentage score."
+              },
+              "overallGrade": {
+                "type": "string",
+                "description": "Overall grade."
+              },
+              "gpaOrCgpa": {
+                "type": "number",
+                "description": "GPA or CGPA."
+              },
+              "classRankOrPosition": {
+                "type": "string",
+                "description": "Class rank or position (optional)."
+              }
+            },
+            "required": [
+              "totalMaximumMarks",
+              "totalMarksObtained",
+              "percentageScore",
+              "overallGrade"
+            ]
+          },
+          "attendanceRecord": {
+            "type": "object",
+            "properties": {
+              "totalWorkingDays": {
+                "type": "integer",
+                "description": "Total number of working days."
+              },
+              "daysPresent": {
+                "type": "integer",
+                "description": "Number of days the student was present."
+              },
+              "daysAbsent": {
+                "type": "integer",
+                "description": "Number of days the student was absent."
+              },
+              "attendancePercentage": {
+                "type": "number",
+                "description": "Attendance percentage."
+              }
+            },
+            "required": [
+              "totalWorkingDays",
+              "daysPresent",
+              "daysAbsent",
+              "attendancePercentage"
+            ]
+          },
+          "coCurricularAndExtraCurricularActivities": {
+            "type": "object",
+            "properties": {
+              "activitiesParticipatedIn": {
+                "type": "string",
+                "description": "Activities the student participated in."
+              },
+              "achievementsAndAwards": {
+                "type": "string",
+                "description": "Achievements and awards."
+              },
+              "gradesOrRemarksInActivities": {
+                "type": "string",
+                "description": "Grades or remarks in activities."
+              }
+            }
+          },
+          "behaviorAndConduct": {
+            "type": "object",
+            "properties": {
+              "teachersRemarksOnConduct": {
+                "type": "string",
+                "description": "Teacher's remarks on conduct."
+              },
+              "disciplineRecord": {
+                "type": "string",
+                "description": "Discipline record."
+              },
+              "socialSkillsAndValuesEvaluation": {
+                "type": "string",
+                "description": "Evaluation of social skills and values."
+              }
+            }
+          },
+          "healthAndPhysicalEducation": {
+            "type": "object",
+            "properties": {
+              "physicalFitnessGrades": {
+                "type": "string",
+                "description": "Physical fitness grades."
+              },
+              "healthStatus": {
+                "type": "string",
+                "description": "Health status."
+              },
+              "participationInSports": {
+                "type": "string",
+                "description": "Participation in sports."
+              }
+            }
+          },
+          "promotionStatus": {
+            "type": "object",
+            "properties": {
+              "resultStatus": {
+                "type": "string",
+                "enum": ["Pass", "Fail"],
+                "description": "Result status."
+              },
+              "promotionToNextClass": {
+                "type": "string",
+                "enum": ["Yes", "No"],
+                "description": "Promotion to next class."
+              },
+              "retentionDetails": {
+                "type": "string",
+                "description": "Retention details (if applicable)."
+              },
+              "recommendationsForImprovement": {
+                "type": "string",
+                "description": "Recommendations for improvement."
+              }
+            },
+            "required": [
+              "resultStatus",
+              "promotionToNextClass"
+            ]
+          },
+          "certificationAndAuthentication": {
+            "type": "object",
+            "properties": {
+              "classTeachersName": {
+                "type": "string",
+                "description": "Name of the class teacher."
+              },
+              "classTeachersSignature": {
+                "type": "string",
+                "description": "Signature of the class teacher."
+              },
+              "headOfDepartmentsSignature": {
+                "type": "string",
+                "description": "Signature of the head of department (optional)."
+              },
+              "principalsName": {
+                "type": "string",
+                "description": "Name of the principal/headmaster."
+              },
+              "principalsSignature": {
+                "type": "string",
+                "description": "Signature of the principal/headmaster."
+              },
+              "dateOfAuthentication": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of authentication."
+              },
+              "schoolSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's seal or stamp."
+              },
+              "verificationQRCodeOrBarcode": {
+                "type": "string",
+                "format": "uri",
+                "description": "Verification QR code or barcode (optional)."
+              }
+            },
+            "required": [
+              "classTeachersName",
+              "classTeachersSignature",
+              "principalsName",
+              "principalsSignature",
+              "dateOfAuthentication",
+              "schoolSealOrStamp"
+            ]
+          },
+          "gradingScaleOrLegend": {
+            "type": "object",
+            "properties": {
+              "gradingScale": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "grade": {
+                      "type": "string",
+                      "description": "Grade symbol (e.g., A1)."
+                    },
+                    "marksRange": {
+                      "type": "string",
+                      "description": "Marks range (e.g., 91-100)."
+                    },
+                    "gradePoint": {
+                      "type": "number",
+                      "description": "Grade point associated with the grade."
+                    }
+                  },
+                  "required": ["grade", "marksRange", "gradePoint"]
+                },
+                "description": "Explanation of grades and grade points."
+              },
+              "passMarksCriteria": {
+                "type": "string",
+                "description": "Pass marks criteria."
+              },
+              "symbolsAndAbbreviationsUsed": {
+                "type": "string",
+                "description": "Explanation of symbols and abbreviations used."
+              }
+            },
+            "required": ["gradingScale", "passMarksCriteria"]
+          },
+          "additionalRemarks": {
+            "type": "object",
+            "properties": {
+              "specialNotes": {
+                "type": "string",
+                "description": "Special notes (e.g., Outstanding Performance, Needs Improvement)."
+              },
+              "parentsOrGuardiansComments": {
+                "type": "string",
+                "description": "Comments from parents or guardians."
+              },
+              "studentsSignature": {
+                "type": "string",
+                "description": "Student's signature (optional)."
+              }
+            }
+          },
+          "instructionsAndPolicies": {
+            "type": "object",
+            "properties": {
+              "instructionsForStudentsAndParents": {
+                "type": "string",
+                "description": "Instructions for students and parents."
+              },
+              "reEvaluationOrRecheckingProcedures": {
+                "type": "string",
+                "description": "Procedures for re-evaluation or rechecking."
+              },
+              "academicPoliciesAndGuidelines": {
+                "type": "string",
+                "description": "Academic policies and guidelines."
+              },
+              "importantDates": {
+                "type": "string",
+                "description": "Important dates (e.g., Next Term Start Date, Parent-Teacher Meetings)."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "studentInformation",
+          "schoolInformation",
+          "examinationDetails",
+          "subjectWisePerformance",
+          "aggregatePerformance",
+          "attendanceRecord",
+          "promotionStatus",
+          "certificationAndAuthentication",
+          "gradingScaleOrLegend"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  

@@ -1,0 +1,487 @@
+{
+    "$id": "unique-leaving-certificate-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Leaving Certificate",
+    "description": "A standardized format for a leaving certificate, confirming a student's academic records and conduct upon leaving the institution.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The starting date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          },
+          "certificateTitle": {
+            "type": "string",
+            "description": "Title of the certificate (e.g., 'School Leaving Certificate')."
+          },
+          "schoolInformation": {
+            "type": "object",
+            "properties": {
+              "schoolName": {
+                "type": "string",
+                "description": "Name of the school."
+              },
+              "schoolLogoOrEmblem": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo or emblem."
+              },
+              "schoolAddress": {
+                "type": "string",
+                "description": "Address of the school."
+              },
+              "contactInformation": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number of the school."
+                  },
+                  "emailAddress": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address of the school."
+                  },
+                  "websiteURL": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Website URL of the school."
+                  }
+                },
+                "required": ["phoneNumber", "emailAddress"]
+              },
+              "affiliationDetails": {
+                "type": "object",
+                "properties": {
+                  "boardOfEducation": {
+                    "type": "string",
+                    "description": "Board of Education (e.g., CBSE, ICSE, State Board)."
+                  },
+                  "affiliationNumberOrAccreditationInformation": {
+                    "type": "string",
+                    "description": "Affiliation number or accreditation information."
+                  }
+                },
+                "required": ["boardOfEducation"]
+              }
+            },
+            "required": ["schoolName", "schoolAddress", "contactInformation"]
+          },
+          "studentInformation": {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "description": "Date of birth of the student (in words and figures)."
+              },
+              "placeOfBirth": {
+                "type": "string",
+                "description": "Place of birth of the student (optional)."
+              },
+              "gender": {
+                "type": "string",
+                "enum": ["Male", "Female", "Other"],
+                "description": "Gender of the student."
+              },
+              "nationality": {
+                "type": "string",
+                "description": "Nationality of the student."
+              },
+              "religion": {
+                "type": "string",
+                "description": "Religion of the student (optional)."
+              },
+              "casteOrCategory": {
+                "type": "string",
+                "description": "Caste/Category of the student (optional)."
+              },
+              "mothersName": {
+                "type": "string",
+                "description": "Mother's name."
+              },
+              "fathersOrGuardiansName": {
+                "type": "string",
+                "description": "Father's or guardian's name."
+              },
+              "residentialAddress": {
+                "type": "string",
+                "description": "Residential address of the student."
+              },
+              "admissionNumberOrRollNumberOrStudentID": {
+                "type": "string",
+                "description": "Admission number, roll number, or student ID."
+              }
+            },
+            "required": [
+              "fullName",
+              "dateOfBirth",
+              "gender",
+              "nationality",
+              "mothersName",
+              "fathersOrGuardiansName",
+              "residentialAddress",
+              "admissionNumberOrRollNumberOrStudentID"
+            ]
+          },
+          "academicDetails": {
+            "type": "object",
+            "properties": {
+              "dateOfAdmission": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of admission to the school."
+              },
+              "classOfAdmission": {
+                "type": "string",
+                "description": "Class in which admission was taken."
+              },
+              "lastClassAttended": {
+                "type": "string",
+                "description": "Last class attended by the student."
+              },
+              "academicSession": {
+                "type": "string",
+                "description": "Academic session (e.g., 2023–2024)."
+              },
+              "subjectsStudied": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of subjects studied (optional)."
+              },
+              "mediumOfInstruction": {
+                "type": "string",
+                "description": "Medium of instruction (e.g., English, Hindi)."
+              },
+              "eligibleForAdmissionToClass": {
+                "type": "string",
+                "description": "Class to which the student is eligible for admission."
+              }
+            },
+            "required": [
+              "dateOfAdmission",
+              "classOfAdmission",
+              "lastClassAttended",
+              "academicSession",
+              "mediumOfInstruction",
+              "eligibleForAdmissionToClass"
+            ]
+          },
+          "attendanceRecord": {
+            "type": "object",
+            "properties": {
+              "totalWorkingDays": {
+                "type": "integer",
+                "description": "Total number of working days."
+              },
+              "totalDaysPresent": {
+                "type": "integer",
+                "description": "Total days the student was present."
+              },
+              "percentageOfAttendance": {
+                "type": "number",
+                "description": "Percentage of attendance."
+              }
+            },
+            "required": [
+              "totalWorkingDays",
+              "totalDaysPresent",
+              "percentageOfAttendance"
+            ]
+          },
+          "conductAndDiscipline": {
+            "type": "object",
+            "properties": {
+              "generalConduct": {
+                "type": "string",
+                "description": "General conduct of the student (e.g., Excellent, Good, Satisfactory)."
+              },
+              "disciplineRecord": {
+                "type": "string",
+                "description": "Discipline record of the student (optional)."
+              }
+            },
+            "required": ["generalConduct"]
+          },
+          "examinationAndResultDetails": {
+            "type": "object",
+            "properties": {
+              "qualifiedForPromotion": {
+                "type": "string",
+                "enum": ["Yes", "No"],
+                "description": "Whether qualified for promotion to higher class."
+              },
+              "appearedForLastExamination": {
+                "type": "string",
+                "enum": ["Yes", "No"],
+                "description": "Whether appeared for last examination."
+              },
+              "resultOfLastExamination": {
+                "type": "string",
+                "enum": ["Pass", "Fail"],
+                "description": "Result of the last examination."
+              },
+              "marksOrGradesObtained": {
+                "type": "string",
+                "description": "Marks or grades obtained (optional)."
+              },
+              "coCurricularAndExtraCurricularParticipation": {
+                "type": "string",
+                "description": "Participation in co-curricular and extra-curricular activities (optional)."
+              }
+            },
+            "required": [
+              "qualifiedForPromotion",
+              "appearedForLastExamination",
+              "resultOfLastExamination"
+            ]
+          },
+          "reasonsForLeaving": {
+            "type": "object",
+            "properties": {
+              "reasonForLeaving": {
+                "type": "string",
+                "description": "Reason for leaving the school."
+              },
+              "dateOfApplicationForLeavingCertificate": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of application for leaving certificate."
+              },
+              "dateOfLeaving": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of leaving the school."
+              }
+            },
+            "required": [
+              "reasonForLeaving",
+              "dateOfApplicationForLeavingCertificate",
+              "dateOfLeaving"
+            ]
+          },
+          "feeAndDuesClearance": {
+            "type": "object",
+            "properties": {
+              "allDuesPaid": {
+                "type": "string",
+                "enum": ["Yes", "No"],
+                "description": "Whether all dues have been paid."
+              },
+              "concessionsAvailed": {
+                "type": "string",
+                "description": "Concessions availed (if any) (optional)."
+              },
+              "feePaidUpTo": {
+                "type": "string",
+                "format": "date",
+                "description": "Fee paid up to (date)."
+              }
+            },
+            "required": [
+              "allDuesPaid",
+              "feePaidUpTo"
+            ]
+          },
+          "certificationStatement": {
+            "type": "object",
+            "properties": {
+              "statement": {
+                "type": "string",
+                "description": "Formal wording confirming the student's leaving."
+              },
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of issue of the certificate."
+              },
+              "placeOfIssue": {
+                "type": "string",
+                "description": "Place of issue (City, State)."
+              }
+            },
+            "required": [
+              "statement",
+              "dateOfIssue",
+              "placeOfIssue"
+            ]
+          },
+          "signatoryDetails": {
+            "type": "object",
+            "properties": {
+              "signatoryName": {
+                "type": "string",
+                "description": "Name of the principal or authorized signatory."
+              },
+              "designation": {
+                "type": "string",
+                "description": "Designation of the issuing authority."
+              },
+              "signature": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the signature of the issuing authority."
+              },
+              "schoolSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's seal or stamp."
+              }
+            },
+            "required": [
+              "signatoryName",
+              "designation",
+              "signature",
+              "schoolSealOrStamp"
+            ]
+          },
+          "verificationDetails": {
+            "type": "object",
+            "properties": {
+              "certificateNumberOrID": {
+                "type": "string",
+                "description": "Certificate number or unique reference ID."
+              },
+              "qrCodeOrBarcode": {
+                "type": "string",
+                "format": "uri",
+                "description": "QR code or barcode for online verification."
+              },
+              "verificationURL": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL for online verification."
+              }
+            }
+          },
+          "additionalRemarks": {
+            "type": "object",
+            "properties": {
+              "specialComments": {
+                "type": "string",
+                "description": "Special comments or observations."
+              },
+              "healthStatus": {
+                "type": "string",
+                "description": "Health status (if relevant)."
+              },
+              "recommendationsForFutureSchool": {
+                "type": "string",
+                "description": "Recommendations for future school (optional)."
+              }
+            }
+          },
+          "instructionsForReceivingInstitution": {
+            "type": "object",
+            "properties": {
+              "validityOfCertificate": {
+                "type": "string",
+                "description": "Validity of the certificate."
+              },
+              "instructionsForAdmissions": {
+                "type": "string",
+                "description": "Instructions for admissions."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "certificateTitle",
+          "schoolInformation",
+          "studentInformation",
+          "academicDetails",
+          "attendanceRecord",
+          "conductAndDiscipline",
+          "examinationAndResultDetails",
+          "reasonsForLeaving",
+          "feeAndDuesClearance",
+          "certificationStatement",
+          "signatoryDetails"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  

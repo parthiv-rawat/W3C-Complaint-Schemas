@@ -1,0 +1,205 @@
+{
+    "$id": "ah4h25f4-9e67-4685-a7fc-65eb5cb325d7",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Best Student of the Year Certificate",
+    "description": "This schema provides a standardized format for the Best Student of the Year certificate, recognizing outstanding performance in academics, leadership, and contributions to the university community.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "enum": ["Best Student of the Year Certificate", "Certificate of Excellence"],
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The starting date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "JsonSchemaValidator2018"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "institutionDetails": {
+            "type": "object",
+            "properties": {
+              "institutionName": {
+                "type": "string",
+                "description": "The official name of the college or university issuing the certificate."
+              },
+              "officialAddress": {
+                "type": "string",
+                "description": "The official address of the college or university."
+              },
+              "contactInformation": {
+                "type": "object",
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Contact phone number of the institution."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address of the institution."
+                  }
+                },
+                "required": ["phoneNumber", "email"]
+              },
+              "officialLogoOrSeal": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the institution's official logo or seal image."
+              }
+            },
+            "required": ["institutionName", "officialAddress", "contactInformation"]
+          },
+          "recipientDetails": {
+            "type": "object",
+            "properties": {
+              "recipientName": {
+                "type": "string",
+                "description": "Full name of the student receiving the award."
+              },
+              "studentIDOrRollNumber": {
+                "type": "string",
+                "description": "Unique identifier or roll number assigned to the student."
+              },
+              "departmentOrFaculty": {
+                "type": "string",
+                "description": "Name of the department or faculty the student is associated with."
+              },
+              "courseOrProgram": {
+                "type": "string",
+                "description": "The course or program the student is enrolled in."
+              }
+            },
+            "required": ["recipientName", "studentIDOrRollNumber", "departmentOrFaculty", "courseOrProgram"]
+          },
+          "awardDetails": {
+            "type": "object",
+            "properties": {
+              "awardTitle": {
+                "type": "string",
+                "enum": ["Best Student of the Year"],
+                "description": "The title of the award, typically 'Best Student of the Year'."
+              },
+              "academicYearOrSession": {
+                "type": "string",
+                "description": "The academic year or session related to the award."
+              },
+              "selectionCriteria": {
+                "type": "string",
+                "description": "The criteria for selecting the award recipient, such as academic excellence, leadership, or extracurricular contributions."
+              }
+            },
+            "required": ["awardTitle", "academicYearOrSession", "selectionCriteria"]
+          },
+          "authorizedSignatory": {
+            "type": "object",
+            "properties": {
+              "signatoryName": {
+                "type": "string",
+                "description": "Name of the person authorizing the certificate."
+              },
+              "designation": {
+                "type": "string",
+                "description": "Designation of the authorized signatory."
+              },
+              "signature": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the digital signature of the authorized signatory."
+              },
+              "institutionSealOrStamp": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the institution's seal or stamp image."
+              }
+            },
+            "required": ["signatoryName", "designation"]
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          }
+        },
+        "required": [
+          "id",
+          "institutionDetails",
+          "recipientDetails",
+          "awardDetails",
+          "authorizedSignatory"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }

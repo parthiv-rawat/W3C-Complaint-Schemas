@@ -1,0 +1,274 @@
+{
+    "$id": "unique-character-certificate-schema-id",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Character Certificate",
+    "description": "This template provides a standardized format for Character Certificate details, confirming the student's character and conduct during their period of attendance.",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/bbs/v1",
+            "https://w3id.org/security/suites/jws-2020/v1"
+          ]
+        },
+        "minItems": 3,
+        "maxItems": 4
+      },
+      "credentialName": {
+        "type": "string",
+        "description": "The official name of the credential or certificate."
+      },
+      "id": {
+        "type": "string",
+        "description": "A unique identifier for the certificate."
+      },
+      "issuer": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "The DID of the organization or individual issuing the certificate."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issuerName": {
+                "type": "string",
+                "description": "The name of the issuing organization or individual."
+              },
+              "id": {
+                "type": "string",
+                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
+              }
+            },
+            "required": ["id", "issuerName"],
+            "additionalProperties": true
+          }
+        ]
+      },
+      "validFrom": {
+        "type": "string",
+        "format": "date",
+        "description": "The starting date from which the certificate is considered valid."
+      },
+      "validUntil": {
+        "type": "string",
+        "format": "date",
+        "description": "The expiry date after which the certificate is no longer valid."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"]
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the certificate holder."
+          },
+          "studentInformation": {
+            "type": "object",
+            "properties": {
+              "studentName": {
+                "type": "string",
+                "description": "Full name of the student."
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of birth of the student."
+              },
+              "gender": {
+                "type": "string",
+                "enum": ["Male", "Female", "Other"],
+                "description": "Gender of the student."
+              },
+              "admissionNumberOrRollNumber": {
+                "type": "string",
+                "description": "Admission number or roll number of the student."
+              },
+              "classOrGrade": {
+                "type": "string",
+                "description": "Current class or grade of the student."
+              }
+            },
+            "required": [
+              "studentName",
+              "dateOfBirth",
+              "gender",
+              "admissionNumberOrRollNumber",
+              "classOrGrade"
+            ]
+          },
+          "schoolInformation": {
+            "type": "object",
+            "properties": {
+              "schoolName": {
+                "type": "string",
+                "description": "The official name of the school issuing the certificate."
+              },
+              "schoolAddress": {
+                "type": "string",
+                "description": "The official address of the school."
+              },
+              "schoolContactDetails": {
+                "type": "object",
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "description": "Contact phone number of the school."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact email address of the school."
+                  }
+                },
+                "required": ["phone", "email"]
+              },
+              "schoolLogo": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's logo (optional)."
+              }
+            },
+            "required": ["schoolName", "schoolAddress", "schoolContactDetails"]
+          },
+          "certificateDetails": {
+            "type": "object",
+            "properties": {
+              "certificateID": {
+                "type": "string",
+                "description": "Certificate ID or unique reference number."
+              },
+              "dateOfIssue": {
+                "type": "string",
+                "format": "date",
+                "description": "Date when the certificate was issued."
+              },
+              "periodOfAttendance": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Start date of attendance."
+                  },
+                  "to": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "End date of attendance."
+                  }
+                },
+                "required": ["from", "to"]
+              },
+              "classOrGradeDuringAttendance": {
+                "type": "string",
+                "description": "Class or grade attended during this period."
+              }
+            },
+            "required": [
+              "certificateID",
+              "dateOfIssue",
+              "periodOfAttendance",
+              "classOrGradeDuringAttendance"
+            ]
+          },
+          "characterAssessment": {
+            "type": "object",
+            "properties": {
+              "disciplineAndBehaviorRemarks": {
+                "type": "string",
+                "description": "Remarks on discipline and behavior (e.g., Excellent, Good, Satisfactory)."
+              },
+              "academicPerformanceSummary": {
+                "type": "string",
+                "description": "Summary of academic performance."
+              },
+              "extraCurricularActivitiesInvolvement": {
+                "type": "string",
+                "description": "Involvement in extra-curricular activities (optional)."
+              },
+              "conductAndMoralCharacterRemarks": {
+                "type": "string",
+                "description": "Remarks on conduct and moral character."
+              }
+            },
+            "required": [
+              "disciplineAndBehaviorRemarks",
+              "academicPerformanceSummary",
+              "conductAndMoralCharacterRemarks"
+            ]
+          },
+          "issuerInformation": {
+            "type": "object",
+            "properties": {
+              "issuingAuthorityName": {
+                "type": "string",
+                "description": "Name of the issuing authority (e.g., Principal, Class Teacher)."
+              },
+              "issuingAuthorityDesignation": {
+                "type": "string",
+                "description": "Designation of the issuing authority."
+              },
+              "signature": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the digital signature of the issuing authority."
+              },
+              "schoolSeal": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL of the school's seal (if physical copy)."
+              }
+            },
+            "required": ["issuingAuthorityName", "issuingAuthorityDesignation", "signature"]
+          },
+          "additionalInformation": {
+            "type": "object",
+            "properties": {
+              "specificComments": {
+                "type": "string",
+                "description": "Any specific comments or additional notes."
+              },
+              "verificationStampOrQRCode": {
+                "type": "string",
+                "format": "uri",
+                "description": "URL to the QR code or stamp for verification (optional)."
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "studentInformation",
+          "schoolInformation",
+          "certificateDetails",
+          "characterAssessment",
+          "issuerInformation"
+        ]
+      }
+    },
+    "required": [
+      "@context",
+      "credentialName",
+      "id",
+      "issuer",
+      "validFrom",
+      "credentialSubject"
+    ]
+  }
+  
