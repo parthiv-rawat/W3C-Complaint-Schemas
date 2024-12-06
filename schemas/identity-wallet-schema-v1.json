@@ -1,5 +1,5 @@
 {
-    "$id": "https://parthiv-rawat.github.io/W3C-Complaint-Schemas/schemas/identity-wallet-schema-v1.json", 
+    "$id": "https://raw.githubusercontent.com/parthiv-rawat/W3C-Complaint-Schemas/refs/heads/main/schemas/identity-wallet-schema-v1.json", 
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "WalletCredentialsSchema",
     "type": "object",
