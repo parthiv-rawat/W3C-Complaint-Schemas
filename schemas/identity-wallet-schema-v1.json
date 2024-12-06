@@ -1,0 +1,96 @@
+{
+    "$id": "https://parthiv-rawat.github.io/W3C-Complaint-Schemas/schemas/identity-wallet-schema-v1.json", 
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "WalletCredentialsSchema",
+    "type": "object",
+    "properties": {
+      "@context": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "The JSON-LD contexts for the Verifiable Credential."
+      },
+      "id": {
+        "type": "string",
+        "format": "uri",
+        "description": "The unique identifier for the credential."
+      },
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["SelfSignedCredential", "VerifiableCredential"]
+        },
+        "description": "The types of the credential."
+      },
+      "issuer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uri",
+            "description": "The DID of the issuer."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the issuer."
+          }
+        },
+        "required": ["id", "name"],
+        "description": "Details about the credential issuer."
+      },
+      "issuanceDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The issuance date of the credential."
+      },
+      "credentialSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The identifier of the credential schema."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["JsonSchemaValidator2018"],
+            "description": "The type of the schema validator."
+          }
+        },
+        "required": ["id", "type"],
+        "description": "Information about the schema for validating the credential."
+      },
+      "credentialSubject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uri",
+            "description": "The identifier for the credential subject (e.g., DID of the holder)."
+          },
+          "userID": {
+            "type": "string",
+            "description": "The user ID associated with the credential."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the credential holder."
+          },
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["WalletCredentials"]
+            },
+            "description": "The type of credential subject."
+          }
+        },
+        "required": ["id", "type"],
+        "description": "Information about the credential subject."
+      }
+    },
+    "required": ["@context", "id", "type", "issuer", "issuanceDate", "credentialSchema", "credentialSubject"],
+    "additionalProperties": false
+  }
+  
