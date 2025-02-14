@@ -1,0 +1,84 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/student-id-certificate",
+    "title": "Student Identification Certificate",
+    "description": "A W3C-compliant schema for a Student Identification Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "userName": { "type": "string" },
+                "enrollmentID": { "type": "string" },
+                "dateOfBirth": { "type": "string", "format": "date" },
+                "gender": { "type": "string" },
+                "nationality": { "type": "string" },
+                "photo": { "type": "string", "format": "uri" },
+                "institutionDetails": {
+                    "type": "object",
+                    "properties": {
+                        "issuerName": { "type": "string" },
+                        "institutionType": { "type": "string" },
+                        "officialAddress": { "type": "string" },
+                        "contactInformation": {
+                            "type": "object",
+                            "properties": {
+                                "phoneNumber": { "type": "string" },
+                                "email": { "type": "string", "format": "email" }
+                            },
+                            "required": ["phoneNumber", "email"]
+                        },
+                        "institutionLogo": { "type": "string", "format": "uri" }
+                    },
+                    "required": ["institutionName"]
+                }
+            },
+            "required": ["id", "userName", "enrollmentID"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
+        }
+    },
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
+}
