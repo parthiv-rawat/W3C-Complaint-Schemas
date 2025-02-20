@@ -6,10 +6,11 @@
     "type": "object",
     "properties": {
         "@context": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
         },
         "id": {
             "type": "string",
@@ -41,32 +42,17 @@
             "type": "object",
             "properties": {
                 "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["StudentIdentificationInformation"] },
+                "identifier": { "type": "string" },
                 "userName": { "type": "string" },
                 "enrollmentID": { "type": "string" },
                 "dateOfBirth": { "type": "string", "format": "date" },
                 "gender": { "type": "string" },
                 "nationality": { "type": "string" },
                 "photo": { "type": "string", "format": "uri" },
-                "institutionDetails": {
-                    "type": "object",
-                    "properties": {
-                        "issuerName": { "type": "string" },
-                        "institutionType": { "type": "string" },
-                        "officialAddress": { "type": "string" },
-                        "contactInformation": {
-                            "type": "object",
-                            "properties": {
-                                "phoneNumber": { "type": "string" },
-                                "email": { "type": "string", "format": "email" }
-                            },
-                            "required": ["phoneNumber", "email"]
-                        },
-                        "institutionLogo": { "type": "string", "format": "uri" }
-                    },
-                    "required": ["institutionName"]
-                }
+                "issuerName": { "type": "string" },
             },
-            "required": ["id", "userName", "enrollmentID"]
+            "required": ["id", "type", "userName", "enrollmentID"]
         },
         "proof": {
             "type": "object",
