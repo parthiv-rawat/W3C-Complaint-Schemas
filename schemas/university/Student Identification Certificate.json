@@ -50,7 +50,7 @@
                 "gender": { "type": "string" },
                 "nationality": { "type": "string" },
                 "photo": { "type": "string", "format": "uri" },
-                "issuerName": { "type": "string" },
+                "issuerName": { "type": "string" }
             },
             "required": ["id", "type", "userName", "enrollmentID"]
         },
