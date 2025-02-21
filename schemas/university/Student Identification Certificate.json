@@ -13,6 +13,7 @@
             ]
         },
         "design": {"type": "string"},
+        "orientation": {"type": "string"},
         "id": {
             "type": "string",
             "format": "uri"
