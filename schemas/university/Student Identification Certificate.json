@@ -12,6 +12,7 @@
                 { "type": "object" }
             ]
         },
+        "design": {"type": "string"},
         "id": {
             "type": "string",
             "format": "uri"
