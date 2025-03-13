@@ -1,0 +1,83 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/parent-id-certificate",
+    "title": "Parent Identification Certificate",
+    "description": "A W3C-compliant schema for a Parent Identification Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
+        },
+        "design": { "type": "string" },
+        "orientation": { "type": "string" },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["ParentIdentificationInformation"] },
+                "parentName": { "type": "string" },
+                "relationship": { "type": "string", "enum": ["Father", "Mother", "Guardian"] },
+                "identifier": { "type": "string" },
+                "dateOfBirth": { "type": "string", "format": "date" },
+                "gender": { "type": "string" },
+                "nationality": { "type": "string" },
+                "photo": { "type": "string", "format": "uri" },
+                "contactNumber": { "type": "string" },
+                "email": { "type": "string", "format": "email" },
+                "linkedStudent": {
+                    "type": "object",
+                    "properties": {
+                        "studentId": { "type": "string", "format": "uri" },
+                        "studentName": { "type": "string" },
+                        "enrollmentID": { "type": "string" }
+                    },
+                    "required": ["studentId", "studentName", "enrollmentID"]
+                },
+                "issuerName": { "type": "string" }
+            },
+            "required": ["id", "type", "parentName", "relationship", "linkedStudent"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
+        }
+    },
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
+}
