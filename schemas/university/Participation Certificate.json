@@ -1,0 +1,70 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/participation-certificate",
+    "title": "Participation Certificate",
+    "description": "A W3C-compliant schema for a Participation Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
+        },
+        "design": {"type": "string"},
+        "orientation": {"type": "string"},
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["ParticipationCertificateInformation"] },
+                "identifier": { "type": "string" },
+                "userName": { "type": "string" },
+                "enrollmentID": { "type": "string" },
+                "gender": { "type": "string" },
+                "issuerName": { "type": "string" },
+                "competitionName": { "type": "string"}
+            },
+            "required": ["id", "type", "userName", "competitionName"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
+        }
+    },
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
+}
