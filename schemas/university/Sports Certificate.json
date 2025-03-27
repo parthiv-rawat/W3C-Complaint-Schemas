@@ -1,119 +1,68 @@
 {
-  "$id": "1d83a55f4-9e67-4685-a7777c-65eb5cb325d7",
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Sports Certificate",
-  "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
-  "type": "object",
-  "properties": {
-    "@context": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/bbs/v1",
-          "https://w3id.org/security/suites/jws-2020/v1"
-        ]
-      },
-      "minItems": 3,
-      "maxItems": 4
-    },
-    "credentialName": {
-      "type": "string",
-      "description": "The official name of the credential or certificate."
-    },
-    "id": {
-      "type": "string",
-      "description": "A unique identifier for the certificate."
-    },
-    "dateOfCreation": {
-      "type": "string",
-      "description": "The date when the certificate was issued.",
-      "format": "date"
-    },
-    "issuer": {
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "The DID of the organization or individual issuing the certificate."
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/sports-certificate",
+    "title": "Sports Certificate",
+    "description": "A W3C-compliant schema for a Sports Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "issuerName": {
-              "type": "string",
-              "description": "The name of the issuing organization or individual."
-            },
-            "id": {
-              "type": "string",
-              "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
-            }
-          },
-          "required": [
-            "id",
-            "issuerName"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "validFrom": {
-      "type": "string",
-      "description": "The starting date from which the certificate is considered valid.",
-      "format": "date"
-    },
-    "validUntil": {
-      "type": "string",
-      "description": "The expiry date after which the certificate is no longer valid.",
-      "format": "date"
-    },
-    "credentialSchema": {
-      "type": "object",
-      "properties": {
+        "design": {"type": "string"},
+        "orientation": {"type": "string"},
         "id": {
-          "type": "string"
+            "type": "string",
+            "format": "uri"
         },
         "type": {
-          "type": "string",
-          "enum": [
-            "JsonSchemaValidator2018"
-          ]
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["SportsCertificateInformation"] },
+                "identifier": { "type": "string" },
+                "userName": { "type": "string" },
+                "sportName": { "type": "string" },
+                "issuerName": { "type": "string" }
+            },
+            "required": ["id", "type", "userName", "sportName"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
         }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
     },
-    "credentialSubject": {
-      "type": "object",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "description": "The full name of the certificate holder."
-        },
-        "sportName": {
-          "type": "string",
-          "description": "The name of the sport for which the certificate is awarded."
-        },
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the certificate holder, such as student ID."
-        }
-      },
-      "required": [
-        "id",
-        "userName",
-        "sportName"
-      ]
-    }
-  },
-  "required": [
-    "@context",
-    "id",
-    "issuer",
-    "validFrom",
-    "credentialSubject",
-    "credentialName"
-  ]
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
 }
