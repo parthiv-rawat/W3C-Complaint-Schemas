@@ -44,7 +44,7 @@
             "type": "object",
             "properties": {
                 "id": { "type": "string", "format": "uri" },
-                "type": { "type": "string", "enum": ["StudentIdentificationInformation"] },
+                "type": { "type": "string", "enum": ["UniversityDegreeInformation"] },
                 "identifier": { "type": "string" },
                 "userName": { "type": "string" },
                 "enrollmentNumber": { "type": "string" },
