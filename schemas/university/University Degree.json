@@ -53,7 +53,7 @@
                 "degreeType": { "type": "string" },
                 "issuerName": { "type": "string" }
             },
-            "required": ["id", "type", "userName", "enrollmentNumber", "degreeType"]
+            "required": ["id", "type", "userName", "degreeType"]
         },
         "proof": {
             "type": "object",
