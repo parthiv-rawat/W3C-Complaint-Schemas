@@ -1,172 +1,71 @@
 {
-  "$id": "2383a55f4-9e67-4685-a7fc-65eb5cb325d7",
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Character Certificate",
-  "description": "This template provides a standardized format for character certificate details, attesting to the character and behavior of an individual, typically issued by educational institutions.",
-  "type": "object",
-  "properties": {
-    "@context": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/bbs/v1",
-          "https://w3id.org/security/suites/jws-2020/v1"
-        ]
-      },
-      "minItems": 3,
-      "maxItems": 4
-    },
-    "credentialName": {
-      "type": "string",
-      "description": "The official name of the credential or certificate."
-    },
-    "id": {
-      "type": "string",
-      "description": "A unique identifier for the certificate."
-    },
-    "issuer": {
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "The DID of the organization or individual issuing the certificate."
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/character-certificate",
+    "title": "Character Certificate",
+    "description": "A W3C-compliant schema for a Character Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "issuerName": {
-              "type": "string",
-              "description": "The name of the issuing organization or individual."
-            },
-            "id": {
-              "type": "string",
-              "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
-            }
-          },
-          "required": [
-            "id",
-            "issuerName"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "validFrom": {
-      "type": "string",
-      "format": "date",
-      "description": "The starting date from which the certificate is considered valid."
-    },
-    "validUntil": {
-      "type": "string",
-      "format": "date",
-      "description": "The expiry date after which the certificate is no longer valid."
-    },
-    "credentialSchema": {
-      "type": "object",
-      "properties": {
+        "design": {"type": "string"},
+        "orientation": {"type": "string"},
         "id": {
-          "type": "string"
+            "type": "string",
+            "format": "uri"
         },
         "type": {
-          "type": "string",
-          "enum": [
-            "JsonSchemaValidator2018"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
-    "credentialSubject": {
-      "type": "object",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "description": "The full name of the certificate holder."
-        },
-        "rollNumber": {
-          "type": "string",
-          "description": "The roll number of the certificate holder, as assigned by the educational institution."
-        },
-        "fatherName": {
-          "type": "string",
-          "description": "The name of the certificate holder's father."
-        },
-        "motherName": {
-          "type": "string",
-          "description": "The name of the certificate holder's mother."
-        },
-        "degreeName": {
-          "type": "string",
-          "description": "The name of the degree or program the certificate holder has completed, if applicable."
-        },
-        "completionYear": {
-          "type": "string",
-          "format": "date",
-          "description": "The year in which the student completed or is expected to complete their degree program."
-        },
-        "session": {
-          "type": "string",
-          "description": "The academic year or time period during which the sports achievement was accomplished."
-        },
-        "cgpa": {
-          "type": "number",
-          "description": "The student's overall academic performance score, calculated as an average of grades across all courses. A higher CGPA indicates better academic achievement."
-        },
-        "headOfDepartment": {
-          "type": "string",
-          "description": "The name of the head of department or faculty issuing the certificate."
-        },
-        "address": {
-          "type": "object",
-          "properties": {
-            "country": {
-              "type": "string",
-              "description": "The country of residence of the certificate holder."
-            },
-            "state": {
-              "type": "string",
-              "description": "The state or region of residence of the certificate holder."
-            },
-            "city": {
-              "type": "string",
-              "description": "The city of residence of the certificate holder."
+            "type": "array",
+            "items": {
+                "type": "string"
             }
-          },
-          "required": [
-            "country",
-            "state",
-            "city"
-          ]
         },
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the certificate holder, such as a personal ID number."
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["CharacterCertificateInformation"] },
+                "identifier": { "type": "string" },
+                "userName": { "type": "string" },
+                "rollNumber": { "type": "string" },
+                "completionYear": { "type": "string", "format": "date" },
+                "session": { "type": "string" },
+                "headOfDepartment": { "type": "string" },
+                "issuerName": { "type": "string" }
+            },
+            "required": ["id", "type", "userName", "rollNumber", "completionYear", "session"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
         }
-      },
-      "required": [
-        "id",
-        "userName",
-        "rollNumber",
-        "fatherName",
-        "motherName",
-        "degreeName",
-        "completionYear",
-        "session",
-        "cgpa",
-        "headOfDepartment"
-      ]
-    }
-  },
-  "required": [
-    "@context",
-    "credentialName",
-    "id",
-    "issuer",
-    "validFrom",
-    "credentialSubject"
-  ]
+    },
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
 }
