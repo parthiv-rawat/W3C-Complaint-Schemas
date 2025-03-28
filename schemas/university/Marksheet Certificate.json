@@ -1,215 +1,78 @@
 {
-  "$id": "b7659cd7-1f3e-46be-9e89-7c203e3456c6",
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Marksheet Certificate",
-  "description": "This template defines a marksheet certificate with mandatory student details and a table for subjects and assessments (e.g., quizzes, midterms, finals).",
-  "type": "object",
-  "properties": {
-    "@context": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/bbs/v1",
-          "https://w3id.org/security/suites/jws-2020/v1"
-        ]
-      },
-      "minItems": 3,
-      "maxItems": 4
-    },
-    "credentialName": {
-      "type": "string",
-      "description": "The official name of the credential, e.g., 'Marksheet Certificate'."
-    },
-    "id": {
-      "type": "string",
-      "description": "A unique identifier for the marksheet certificate."
-    },
-    "dateOfIssue": {
-      "type": "string",
-      "description": "The date when the marksheet was issued.",
-      "format": "date"
-    },
-    "issuer": {
-      "oneOf": [
-        {
-          "type": "string",
-          "description": "The DID of the organization or individual issuing the certificate."
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/marksheet-certificate",
+    "title": "Marksheet Certificate",
+    "description": "A W3C-compliant schema for a Marksheet Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                { "type": "string" },
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "object" }
+            ]
         },
-        {
-          "type": "object",
-          "properties": {
-            "issuerName": {
-              "type": "string",
-              "description": "The name of the issuing organization or individual."
-            },
-            "id": {
-              "type": "string",
-              "description": "A unique identifier for the issuer."
-            }
-          },
-          "required": [
-            "id",
-            "issuerName"
-          ],
-          "additionalProperties": true
-        }
-      ]
-    },
-    "validFrom": {
-      "type": "string",
-      "description": "The date from which the marksheet certificate is valid.",
-      "format": "date"
-    },
-    "credentialSchema": {
-      "type": "object",
-      "properties": {
+        "design": {"type": "string"},
+        "orientation": {"type": "string"},
         "id": {
-          "type": "string"
+            "type": "string",
+            "format": "uri"
         },
         "type": {
-          "type": "string",
-          "enum": [
-            "JsonSchemaValidator2018"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
-    "credentialSubject": {
-      "type": "object",
-      "properties": {
-        "studentName": {
-          "type": "string",
-          "description": "The full name of the student."
-        },
-        "id": {
-          "type": "string",
-          "description": "A unique identifier for the student, such as a roll number or student ID."
-        },
-        "fatherName": {
-          "type": "string",
-          "description": "The name of the certificate holder's father."
-        },
-        "motherName": {
-          "type": "string",
-          "description": "The name of the certificate holder's mother."
-        },
-        "rollNumber": {
-          "type": "string",
-          "description": "The roll number of the student."
-        },
-        "enrollmentNumber": {
-          "type": "string",
-          "description": "The enrollment number of the student."
-        },
-        "address": {
-          "type": "object",
-          "properties": {
-            "country": {
-              "type": "string",
-              "description": "The country of residence of the certificate holder."
-            },
-            "state": {
-              "type": "string",
-              "description": "The state or region of residence of the certificate holder."
-            },
-            "city": {
-              "type": "string",
-              "description": "The city of residence of the certificate holder."
+            "type": "array",
+            "items": {
+                "type": "string"
             }
-          },
-          "required": [
-            "country",
-            "state",
-            "city"
-          ]
         },
-        "examination": {
-          "type": "string",
-          "description": "The academic date (month and year) in which marksheet is issued."
-        },
-        "semester": {
-          "type": "string",
-          "description": "The semester of program for which marksheet is issued."
-        },
-        "result": {
-          "type": "string",
-          "description": "The overall result of the semester's examination."
-        },
-        "marksheet": {
-          "type": "array",
-          "description": "An array containing subject-wise assessments and marks/grades.",
-          "items": {
+        "issuer": {
             "type": "object",
             "properties": {
-              "subjectName": {
-                "type": "string",
-                "description": "The name of the subject."
-              },
-              "assessments": {
-                "type": "array",
-                "description": "An array containing different assessments for this subject.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "assessmentType": {
-                      "type": "string",
-                      "description": "The type of assessment, e.g., Quiz, Midterm, Final."
-                    },
-                    "marksObtained": {
-                      "type": "number",
-                      "description": "Marks obtained in this assessment.",
-                      "minimum": 0
-                    },
-                    "totalMarks": {
-                      "type": "number",
-                      "description": "Total possible marks for this assessment.",
-                      "minimum": 0
-                    },
-                    "grade": {
-                      "type": "string",
-                      "description": "Grade obtained in this assessment (if applicable)."
-                    }
-                  },
-                  "required": [
-                    "assessmentType",
-                    "marksObtained",
-                    "totalMarks"
-                  ]
-                }
-              }
+                "id": { "type": "string", "format": "uri" },
+                "name": { "type": "string" }
             },
-            "required": [
-              "subjectName",
-              "assessments"
-            ]
-          }
+            "required": ["id", "name"]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "format": "uri" },
+                "type": { "type": "string", "enum": ["MarksheetCertificateInformation"] },
+                "identifier": { "type": "string" },
+                "userName": { "type": "string" },
+                "degreeName": { "type": "string" },
+                "enrollmentNumber": { "type": "string" },
+                "session": { "type": "string" },
+                "affiliationNumber": { "type": "string" },
+                "rollNumber": { "type": "string" },
+                "dateOfBirth": { "type": "string" },
+                "department": { "type": "string" },
+                "semester": { "type": "string" },
+                "fatherName": { "type": "string" },
+                "motherName": { "type": "string" },
+                "registrarName": { "type": "string" },
+                "issuerName": { "type": "string" }
+            },
+            "required": ["id", "type", "userName", "enrollmentNumber", "session", "rollNumber"]
+        },
+        "proof": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "created": { "type": "string", "format": "date-time" },
+                "proofPurpose": { "type": "string" },
+                "verificationMethod": { "type": "string", "format": "uri" },
+                "signature": { "type": "string" }
+            },
+            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
         }
-      },
-      "required": [
-        "studentName",
-        "id",
-        "fatherName",
-        "motherName",
-        "rollNumber",
-        "enrollmentNumber",
-        "examination",
-        "semester",
-        "result"
-      ]
-    }
-  },
-  "required": [
-    "@context",
-    "id",
-    "issuer",
-    "validFrom",
-    "credentialSubject",
-    "credentialName"
-  ]
+    },
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
 }
