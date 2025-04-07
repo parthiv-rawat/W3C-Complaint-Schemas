@@ -28,9 +28,9 @@
             "type": "object",
             "properties": {
                 "id": { "type": "string", "format": "uri" },
-                "name": { "type": "string" }
+                "issuerName": { "type": "string" }
             },
-            "required": ["id", "name"]
+            "required": ["id", "issuerName"]
         },
         "validFrom": {
             "type": "string",
@@ -51,22 +51,10 @@
                 "dateOfBirth": { "type": "string", "format": "date" },
                 "gender": { "type": "string" },
                 "nationality": { "type": "string" },
-                "photo": { "type": "string", "format": "uri" },
-                "issuerName": { "type": "string" }
+                "photo": { "type": "string", "format": "uri" }
             },
             "required": ["id", "type", "userName", "enrollmentID"]
-        },
-        "proof": {
-            "type": "object",
-            "properties": {
-                "type": { "type": "string" },
-                "created": { "type": "string", "format": "date-time" },
-                "proofPurpose": { "type": "string" },
-                "verificationMethod": { "type": "string", "format": "uri" },
-                "signature": { "type": "string" }
-            },
-            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
         }
     },
-    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
 }
