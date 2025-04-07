@@ -12,8 +12,8 @@
                 { "type": "object" }
             ]
         },
-        "design": { "type": "string" },
-        "orientation": { "type": "string" },
+        "design": {"type": "string"},
+        "orientation": {"type": "string"},
         "id": {
             "type": "string",
             "format": "uri"
@@ -45,27 +45,18 @@
             "properties": {
                 "id": { "type": "string", "format": "uri" },
                 "type": { "type": "string", "enum": ["ParentIdentificationInformation"] },
-                "parentName": { "type": "string" },
-                "relationship": { "type": "string", "enum": ["Father", "Mother", "Guardian"] },
                 "identifier": { "type": "string" },
-                "dateOfBirth": { "type": "string", "format": "date" },
-                "gender": { "type": "string" },
-                "nationality": { "type": "string" },
-                "photo": { "type": "string", "format": "uri" },
+                "fullName": { "type": "string" },
+                "relationship": {
+                  "type": "string",
+                  "enum": ["father", "mother", "guardian", "stepfather", "stepmother", "foster"]
+                },
                 "contactNumber": { "type": "string" },
                 "email": { "type": "string", "format": "email" },
-                "linkedStudent": {
-                    "type": "object",
-                    "properties": {
-                        "studentId": { "type": "string", "format": "uri" },
-                        "studentName": { "type": "string" },
-                        "enrollmentID": { "type": "string" }
-                    },
-                    "required": ["studentId", "studentName", "enrollmentID"]
-                },
-                "issuerName": { "type": "string" }
+                "dateOfBirth": { "type": "string", "format": "date" },
+                "gender": { "type": "string" },
             },
-            "required": ["id", "type", "parentName", "relationship", "linkedStudent"]
+            "required": ["id", "type", "fullName", "relationship"]
         },
         "proof": {
             "type": "object",
