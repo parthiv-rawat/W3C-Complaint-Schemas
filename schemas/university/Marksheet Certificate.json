@@ -28,17 +28,17 @@
             "type": "object",
             "properties": {
                 "id": { "type": "string", "format": "uri" },
-                "name": { "type": "string" }
+                "issuerName": { "type": "string" }
             },
-            "required": ["id", "name"]
+            "required": ["id", "issuerName"]
         },
         "validFrom": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
         },
         "validUntil": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
         },
         "credentialSubject": {
             "type": "object",
@@ -57,22 +57,10 @@
                 "semester": { "type": "string" },
                 "fatherName": { "type": "string" },
                 "motherName": { "type": "string" },
-                "registrarName": { "type": "string" },
-                "issuerName": { "type": "string" }
+                "registrarName": { "type": "string" }
             },
             "required": ["id", "type", "userName", "enrollmentNumber", "session", "rollNumber"]
-        },
-        "proof": {
-            "type": "object",
-            "properties": {
-                "type": { "type": "string" },
-                "created": { "type": "string", "format": "date-time" },
-                "proofPurpose": { "type": "string" },
-                "verificationMethod": { "type": "string", "format": "uri" },
-                "signature": { "type": "string" }
-            },
-            "required": ["type", "created", "proofPurpose", "verificationMethod", "signature"]
         }
     },
-    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject", "proof"]
+    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
 }
