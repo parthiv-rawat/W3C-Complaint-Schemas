@@ -54,5 +54,5 @@
           "required": ["id", "type", "userName", "eventName"]
       }
   },
-  "required": ["@context", "id", "type", "issuer", "validFrom", , "credentialSubject"]
+  "required": ["@context", "id", "type", "issuer", "validFrom", "credentialSubject"]
 }
