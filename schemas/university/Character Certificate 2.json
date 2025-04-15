@@ -1,0 +1,123 @@
+{
+    "$id": "",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Character Certificate 2",
+    "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                {
+                    "type": "string",
+                    "items": {}
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object",
+                    "items": {}
+                }
+            ]
+        },
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CharacterCertificateInformation"
+                    ]
+                },
+                "completionYear": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "departmentName": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "headOfDepartment": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "cgpa": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "enrollmentNumber",
+                "rollNumber",
+                "session",
+                "competitionName",
+                "completionYear"
+            ]
+        }
+    },
+    "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
+    ]
+}
