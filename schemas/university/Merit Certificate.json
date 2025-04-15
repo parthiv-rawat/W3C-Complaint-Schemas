@@ -1,205 +1,148 @@
 {
-    "$id": "5c9c75f4-9e67-4685-a7fc-65eb5cb325d7",
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "Merit Certificate",
-    "description": "This schema provides a standardized format for merit certificate details, recognizing outstanding academic or extracurricular achievements.",
+    "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
     "type": "object",
     "properties": {
-      "@context": {
-        "type": "array",
-        "items": {
-          "type": "string",
-          "enum": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://w3id.org/security/bbs/v1",
-            "https://w3id.org/security/suites/jws-2020/v1"
-          ]
-        },
-        "minItems": 3,
-        "maxItems": 4
-      },
-      "credentialName": {
-        "type": "string",
-        "enum": ["Merit Certificate", "Certificate of Merit"],
-        "description": "The official name of the credential or certificate."
-      },
-      "id": {
-        "type": "string",
-        "description": "A unique identifier for the certificate."
-      },
-      "issuer": {
-        "oneOf": [
-          {
-            "type": "string",
-            "description": "The DID of the organization or individual issuing the certificate."
-          },
-          {
-            "type": "object",
-            "properties": {
-              "issuerName": {
-                "type": "string",
-                "description": "The name of the issuing organization or individual."
-              },
-              "id": {
-                "type": "string",
-                "description": "A unique identifier for the issuer, such as a regulatory ID or an organization-specific identifier."
-              }
-            },
-            "required": ["id", "issuerName"],
-            "additionalProperties": true
-          }
-        ]
-      },
-      "validFrom": {
-        "type": "string",
-        "format": "date",
-        "description": "The starting date from which the certificate is considered valid."
-      },
-      "validUntil": {
-        "type": "string",
-        "format": "date",
-        "description": "The expiry date after which the certificate is no longer valid."
-      },
-      "credentialSchema": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "JsonSchemaValidator2018"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "type"
-        ]
-      },
-      "credentialSubject": {
-        "type": "object",
-        "properties": {
-          "institutionDetails": {
-            "type": "object",
-            "properties": {
-              "institutionName": {
-                "type": "string",
-                "description": "The official name of the college or university issuing the certificate."
-              },
-              "officialAddress": {
-                "type": "string",
-                "description": "The official address of the college or university."
-              },
-              "contactInformation": {
-                "type": "object",
-                "properties": {
-                  "phoneNumber": {
+        "@context": {
+            "oneOf": [
+                {
                     "type": "string",
-                    "description": "Contact phone number of the institution."
-                  },
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "description": "Contact email address of the institution."
-                  }
+                    "items": {}
                 },
-                "required": ["phoneNumber", "email"]
-              },
-              "officialLogoOrSeal": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL of the institution's official logo or seal image."
-              }
-            },
-            "required": ["institutionName", "officialAddress", "contactInformation"]
-          },
-          "recipientDetails": {
-            "type": "object",
-            "properties": {
-              "studentName": {
-                "type": "string",
-                "description": "Full name of the student."
-              },
-              "studentIDOrRollNumber": {
-                "type": "string",
-                "description": "Unique identifier or roll number assigned to the student by the institution."
-              },
-              "departmentOrFaculty": {
-                "type": "string",
-                "description": "Name of the department or faculty the student is associated with."
-              },
-              "courseOrProgram": {
-                "type": "string",
-                "description": "The course or program the student is enrolled in."
-              }
-            },
-            "required": ["studentName", "studentIDOrRollNumber", "departmentOrFaculty", "courseOrProgram"]
-          },
-          "achievementDetails": {
-            "type": "object",
-            "properties": {
-              "statementOfMerit": {
-                "type": "string",
-                "description": "Statement of merit or achievement."
-              },
-              "specificAwardOrRanking": {
-                "type": "string",
-                "description": "Mention of specific award or ranking, if applicable."
-              },
-              "academicYearOrTerm": {
-                "type": "string",
-                "description": "Academic year or term for which the certificate is awarded."
-              }
-            },
-            "required": ["statementOfMerit", "academicYearOrTerm"]
-          },
-          "authorizedSignatory": {
-            "type": "object",
-            "properties": {
-              "signatoryName": {
-                "type": "string",
-                "description": "Name of the person signing the certificate."
-              },
-              "designation": {
-                "type": "string",
-                "description": "Designation of the signatory."
-              },
-              "signature": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL of the digital signature of the issuing authority."
-              },
-              "institutionSealOrStamp": {
-                "type": "string",
-                "format": "uri",
-                "description": "URL of the institution's seal or stamp image."
-              }
-            },
-            "required": ["signatoryName", "designation"]
-          },
-          "id": {
-            "type": "string",
-            "description": "A unique identifier for the certificate holder."
-          }
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object",
+                    "items": {}
+                }
+            ]
         },
-        "required": [
-          "id",
-          "institutionDetails",
-          "recipientDetails",
-          "achievementDetails",
-          "authorizedSignatory"
-        ]
-      }
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MeritCertificateInformation"
+                    ]
+                },
+                "userName": {
+                    "type": "string",
+                    "description": "The full name of the certificate holder."
+                },
+                "address": {
+                    "type": "string"
+                },
+                "certificateNumber": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "branch": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                },
+                "rank": {
+                    "type": "string"
+                },
+                "examinationName": {
+                    "type": "string"
+                },
+                "recognitionLevel": {
+                    "type": "string"
+                },
+                "totalMarks": {
+                    "type": "string"
+                },
+                "passoutYear": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "department",
+                "passoutYear",
+                "rank",
+                "session",
+                "branch",
+                "enrollmentNumber",
+                "location",
+                "address"
+            ]
+        }
     },
     "required": [
-      "@context",
-      "credentialName",
-      "id",
-      "issuer",
-      "validFrom",
-      "credentialSubject"
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
     ]
-  }
-  
+}
