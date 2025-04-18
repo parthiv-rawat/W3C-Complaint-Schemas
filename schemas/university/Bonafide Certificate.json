@@ -94,17 +94,30 @@
                 },
                 "dateOfBirth": {
                     "type": "string"
-                }
+                },
+                "department": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "certificateSerialNumber": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                }, 
+                "enrollmentNumber": {
+                    "type": "string"
+                } 
             },
             "required": [
                 "id",
                 "userName",
-                "purpose",
-                "fatherName",
-                "motherName",
-                "courseName",
-                "session",
-                "address"
+                "purpose"
             ]
         },
         "proof": {}
