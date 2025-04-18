@@ -1,59 +1,142 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/schema/character-certificate",
-  "title": "Character Certificate",
-  "description": "A W3C-compliant schema for a Character Certificate",
-  "type": "object",
-  "properties": {
-      "@context": {
-          "oneOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } },
-              { "type": "object" }
-          ]
-      },
-      "design": {"type": "string"},
-      "orientation": {"type": "string"},
-      "id": {
-          "type": "string",
-          "format": "uri"
-      },
-      "type": {
-          "type": "array",
-          "items": {
-              "type": "string"
-          }
-      },
-      "issuer": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "issuerName": { "type": "string" }
-          },
-          "required": ["id", "issuerName"]
-      },
-      "validFrom": {
-          "type": "string",
-          "format": "date"
-      },
-      "validUntil": {
-          "type": "string",
-          "format": "date"
-      },
-      "credentialSubject": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "type": { "type": "string", "enum": ["CharacterCertificateInformation"] },
-              "identifier": { "type": "string" },
-              "userName": { "type": "string" },
-              "rollNumber": { "type": "string" },
-              "completionYear": { "type": "string", "format": "date" },
-              "session": { "type": "string" },
-              "headOfDepartment": { "type": "string" }
-          },
-          "required": ["id", "type", "userName", "rollNumber", "completionYear", "session"]
-      }
-  },
-  "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/character-certificate",
+    "title": "Character Certificate",
+    "description": "A W3C-compliant schema for a Character Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object"
+                }
+            ]
+        },
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "CharacterCertificateInformation"
+                    ]
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "degreeName": {
+                    "type": "string"
+                },
+                "graduationYear": {
+                    "type": "string"
+                },
+                "cgpa": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "headOfDepartment": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "completionYear": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "rollNumber",
+                "session"
+            ]
+        }
+    },
+    "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
+    ]
 }
