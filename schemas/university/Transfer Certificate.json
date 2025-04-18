@@ -65,10 +65,7 @@
                     "format": "uri"
                 },
                 "type": {
-                    "type": "string",
-                    "enum": [
-                        "TransferCertificateInformation"
-                    ]
+                    "type": "string"
                 },
                 "userName": {
                     "type": "string",
@@ -91,6 +88,45 @@
                 },
                 "session": {
                     "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "division": {
+                    "type": "string"
+                },
+                "promotion": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "cleared": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "dateOfAdimission": {
+                    "type": "string"
+                },
+                "transferCertificateDate": {
+                    "type": "string"
+                },
+                "transferCertificateNumber": {
+                    "type": "string"
+                },
+                "totalWorkingAttandance": {
+                    "type": "string"
+                },
+                "totalAttendance": {
+                    "type": "string"
+                },
+                "admissionNumber": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -99,7 +135,8 @@
                 "department",
                 "session"
             ]
-        }
+        },
+        "proof": {}
     },
     "required": [
         "@context",
