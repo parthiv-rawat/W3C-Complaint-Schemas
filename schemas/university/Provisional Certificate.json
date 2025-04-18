@@ -1,62 +1,134 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/schema/provisional-certificate",
-  "title": "Provisional Certificate",
-  "description": "A W3C-compliant schema for a Provisional Certificate",
-  "type": "object",
-  "properties": {
-      "@context": {
-          "oneOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } },
-              { "type": "object" }
-          ]
-      },
-      "design": {"type": "string"},
-      "orientation": {"type": "string"},
-      "id": {
-          "type": "string",
-          "format": "uri"
-      },
-      "type": {
-          "type": "array",
-          "items": {
-              "type": "string"
-          }
-      },
-      "issuer": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "issuerName": { "type": "string" }
-          },
-          "required": ["id", "issuerName"]
-      },
-      "validFrom": {
-          "type": "string",
-          "format": "date"
-      },
-      "validUntil": {
-          "type": "string",
-          "format": "date"
-      },
-      "credentialSubject": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "type": { "type": "string", "enum": ["ProvisionalCertificateInformation"] },
-              "identifier": { "type": "string" },
-              "userName": { "type": "string" },
-              "completionYear": { "type": "string" },
-              "registrationNumber": { "type": "string" },
-              "specialization": { "type": "string" },
-              "rollNumber": { "type": "string" },
-              "fatherName": { "type": "string" },
-              "motherName": { "type": "string" },
-              "division": { "type": "string" }
-          },
-          "required": ["id", "type", "userName", "completionYear", "registrationNumber", "specialization", "rollNumber"]
-      }
-  },
-  "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/provisional-certificate",
+    "title": "Provisional Certificate",
+    "description": "A W3C-compliant schema for a Provisional Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object"
+                }
+            ]
+        },
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "ProvisionalCertificateInformation"
+                    ]
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "completionYear": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "specialization": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "motherName": {
+                    "type": "string"
+                },
+                "division": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "graduationYear": {
+                    "type": "string"
+                },
+                "registrationNumber": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "completionYear",
+                "specialization",
+                "rollNumber"
+            ]
+        }
+    },
+    "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
+    ]
 }
