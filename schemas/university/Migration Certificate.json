@@ -1,59 +1,117 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/schema/migration-certificate",
-  "title": "Migration Certificate",
-  "description": "A W3C-compliant schema for a Migration Certificate",
-  "type": "object",
-  "properties": {
-      "@context": {
-          "oneOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } },
-              { "type": "object" }
-          ]
-      },
-      "design": {"type": "string"},
-      "orientation": {"type": "string"},
-      "id": {
-          "type": "string",
-          "format": "uri"
-      },
-      "type": {
-          "type": "array",
-          "items": {
-              "type": "string"
-          }
-      },
-      "issuer": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "issuerName": { "type": "string" }
-          },
-          "required": ["id", "issuerName"]
-      },
-      "validFrom": {
-          "type": "string",
-          "format": "date"
-      },
-      "validUntil": {
-          "type": "string",
-          "format": "date"
-      },
-      "credentialSubject": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "type": { "type": "string", "enum": ["MigrationCertificateInformation"] },
-              "identifier": { "type": "string" },
-              "userName": { "type": "string" },
-              "courseName": { "type": "string" },
-              "rollNumber": { "type": "string" },
-              "fatherName": { "type": "string" },
-              "motherName": { "type": "string" }
-          },
-          "required": ["id", "type", "userName", "rollNumber"]
-      }
-  },
-  "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.org/schema/migration-certificate",
+    "title": "Migration Certificate",
+    "description": "A W3C-compliant schema for a Migration Certificate",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object"
+                }
+            ]
+        },
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "MigrationCertificateInformation"
+                    ]
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "motherName": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "rollNumber"
+            ]
+        }
+    },
+    "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
+    ]
 }
