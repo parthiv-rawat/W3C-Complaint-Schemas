@@ -1,58 +1,124 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/schema/university-degree",
-  "title": "University Degree",
-  "description": "A W3C-compliant schema for a University Degree",
-  "type": "object",
-  "properties": {
-      "@context": {
-          "oneOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } },
-              { "type": "object" }
-          ]
-      },
-      "design": {"type": "string"},
-      "orientation": {"type": "string"},
-      "id": {
-          "type": "string",
-          "format": "uri"
-      },
-      "type": {
-          "type": "array",
-          "items": {
-              "type": "string"
-          }
-      },
-      "issuer": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "issuerName": { "type": "string" }
-          },
-          "required": ["id", "issuerName"]
-      },
-      "validFrom": {
-          "type": "string",
-          "format": "date-time"
-      },
-      "validUntil": {
-          "type": "string",
-          "format": "date-time"
-      },
-      "credentialSubject": {
-          "type": "object",
-          "properties": {
-              "id": { "type": "string", "format": "uri" },
-              "type": { "type": "string", "enum": ["UniversityDegreeInformation"] },
-              "identifier": { "type": "string" },
-              "userName": { "type": "string" },
-              "enrollmentNumber": { "type": "string" },
-              "division": { "type": "string" },
-              "degreeType": { "type": "string" }
-          },
-          "required": ["id", "type", "userName", "degreeType"]
-      }
-  },
-  "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
+    "$id": "",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "University Degree",
+    "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
+    "type": "object",
+    "properties": {
+        "@context": {
+            "oneOf": [
+                {
+                    "type": "string",
+                    "items": {}
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "object",
+                    "items": {}
+                }
+            ]
+        },
+        "design": {
+            "type": "string"
+        },
+        "orientation": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "format": "uri"
+        },
+        "issuer": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "issuerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issuerName"
+            ]
+        },
+        "validFrom": {
+            "type": "string",
+            "format": "date"
+        },
+        "validUntil": {
+            "type": "string",
+            "format": "date"
+        },
+        "credentialSubject": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "UniversityDegreeinformation"
+                    ]
+                },
+                "accreditation": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "passoutYear": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "userName",
+                "id",
+                "userName",
+                "degreeType"
+            ]
+        },
+        "proof": {}
+    },
+    "required": [
+        "@context",
+        "id",
+        "type",
+        "issuer",
+        "validFrom",
+        "credentialSubject"
+    ]
 }
