@@ -46,7 +46,7 @@
                 "id": { "type": "string", "format": "uri" },
                 "type": { "type": "string", "enum": ["ParentIdentificationInformation"] },
                 "identifier": { "type": "string" },
-                "fullName": { "type": "string" },
+                "userName": { "type": "string" },
                 "relationship": {
                   "type": "string",
                   "enum": ["father", "mother", "guardian", "stepfather", "stepmother", "foster"]
