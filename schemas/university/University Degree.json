@@ -1,7 +1,7 @@
 {
-    "$id": "",
+    "$id": "https://example.com/degree-certificate-2/id",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "University Degree",
+    "title": "University Degree 2",
     "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
     "type": "object",
     "properties": {
@@ -61,42 +61,70 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "uri"
                 },
                 "type": {
                     "type": "string",
                     "enum": [
-                        "UniversityDegreeinformation"
+                        "UniversityDegree2Information"
                     ]
                 },
-                "accreditation": {
-                    "type": "string"
-                },
-                "fatherName": {
+                "affiliationNumber": {
                     "type": "string"
                 },
                 "dateOfBirth": {
                     "type": "string"
                 },
-                "enrollmentNumber": {
+                "degreeName": {
                     "type": "string"
                 },
-                "rollNumber": {
-                    "type": "string"
-                },
-                "userName": {
-                    "type": "string"
-                },
-                "courseName": {
-                    "type": "string"
-                },
-                "passoutYear": {
+                "degreeType": {
                     "type": "string"
                 },
                 "department": {
                     "type": "string"
                 },
+                "division": {
+                    "type": "string"
+                },
+                "enrollmentNumber": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "motherName": {
+                    "type": "string"
+                },
+                "registrarName": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "semester": {
+                    "type": "string"
+                },
                 "session": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "accreditationName": {
+                    "type": "string"
+                },
+                "passoutDate": {
+                    "type": "string"
+                },
+                "courseName": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "endDate": {
                     "type": "string"
                 },
                 "location": {
@@ -108,10 +136,12 @@
                 "userName",
                 "id",
                 "userName",
+                "enrollmentNumber",
+                "session",
+                "rollNumber",
                 "degreeType"
             ]
-        },
-        "proof": {}
+        }
     },
     "required": [
         "@context",
