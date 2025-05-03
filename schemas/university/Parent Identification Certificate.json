@@ -1,63 +1,64 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://example.org/schema/parent-id-certificate",
-    "title": "Parent Identification Certificate",
-    "description": "A W3C-compliant schema for a Parent Identification Certificate",
-    "type": "object",
-    "properties": {
-        "@context": {
-            "oneOf": [
-                { "type": "string" },
-                { "type": "array", "items": { "type": "string" } },
-                { "type": "object" }
-            ]
-        },
-        "design": {"type": "string"},
-        "orientation": {"type": "string"},
-        "id": {
-            "type": "string",
-            "format": "uri"
-        },
-        "type": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
-        },
-        "issuer": {
-            "type": "object",
-            "properties": {
-                "id": { "type": "string", "format": "uri" },
-                "issuerName": { "type": "string" }
-            },
-            "required": ["id", "issuerName"]
-        },
-        "validFrom": {
-            "type": "string",
-            "format": "date-time"
-        },
-        "validUntil": {
-            "type": "string",
-            "format": "date-time"
-        },
-        "credentialSubject": {
-            "type": "object",
-            "properties": {
-                "id": { "type": "string", "format": "uri" },
-                "type": { "type": "string", "enum": ["ParentIdentificationInformation"] },
-                "identifier": { "type": "string" },
-                "userName": { "type": "string" },
-                "relationship": {
-                  "type": "string",
-                  "enum": ["father", "mother", "guardian", "stepfather", "stepmother", "foster"]
-                },
-                "contactNumber": { "type": "string" },
-                "email": { "type": "string", "format": "email" },
-                "dateOfBirth": { "type": "string", "format": "date" },
-                "gender": { "type": "string" }
-            },
-            "required": ["id", "type", "fullName", "relationship"]
-        }
-    },
-    "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schema/parent-id-certificate",
+  "title": "Parent Identification Certificate",
+  "description": "A W3C-compliant schema for a Parent Identification Certificate",
+  "type": "object",
+  "properties": {
+      "@context": {
+          "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } },
+              { "type": "object" }
+          ]
+      },
+      "design": {"type": "string"},
+      "orientation": {"type": "string"},
+      "id": {
+          "type": "string",
+          "format": "uri"
+      },
+      "type": {
+          "type": "array",
+          "items": {
+              "type": "string"
+          }
+      },
+      "issuer": {
+          "type": "object",
+          "properties": {
+              "id": { "type": "string", "format": "uri" },
+              "issuerName": { "type": "string" }
+          },
+          "required": ["id", "issuerName"]
+      },
+      "validFrom": {
+          "type": "string",
+          "format": "date-time"
+      },
+      "validUntil": {
+          "type": "string",
+          "format": "date-time"
+      },
+      "credentialSubject": {
+          "type": "object",
+          "properties": {
+              "id": { "type": "string", "format": "uri" },
+              "type": { "type": "string", "enum": ["ParentIdentificationInformation"] },
+              "identifier": { "type": "string" },
+              "userName": { "type": "string" },
+              "relationship": {
+                "type": "string",
+                "enum": ["father", "mother", "guardian", "stepfather", "stepmother", "foster"]
+              },
+              "contactNumber": { "type": "string" },
+              "email": { "type": "string", "format": "email" },
+              "dateOfBirth": { "type": "string", "format": "date" },
+              "gender": { "type": "string" },
+              "childName": { "type": "string" }
+          },
+          "required": ["id", "type", "fullName", "relationship", "childName"]
+      }
+  },
+  "required": ["@context", "id", "type", "issuer", "validFrom", "validUntil", "credentialSubject"]
 }
