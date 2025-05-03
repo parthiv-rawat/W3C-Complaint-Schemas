@@ -1,14 +1,15 @@
 {
+    "$id": "",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://example.org/schema/character-certificate",
-    "title": "Character Certificate",
-    "description": "A W3C-compliant schema for a Character Certificate",
+    "title": "Character Certificate 2",
+    "description": "This template serves as a foundational certificate, capturing essential information about the certificate holder.",
     "type": "object",
     "properties": {
         "@context": {
             "oneOf": [
                 {
-                    "type": "string"
+                    "type": "string",
+                    "items": {}
                 },
                 {
                     "type": "array",
@@ -17,7 +18,8 @@
                     }
                 },
                 {
-                    "type": "object"
+                    "type": "object",
+                    "items": {}
                 }
             ]
         },
@@ -30,12 +32,6 @@
         "id": {
             "type": "string",
             "format": "uri"
-        },
-        "type": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            }
         },
         "issuer": {
             "type": "object",
@@ -74,60 +70,45 @@
                         "CharacterCertificateInformation"
                     ]
                 },
-                "userName": {
-                    "type": "string"
-                },
-                "rollNumber": {
-                    "type": "string"
-                },
-                "session": {
-                    "type": "string"
-                },
-                "city": {
-                    "type": "string"
-                },
-                "state": {
-                    "type": "string"
-                },
-                "country": {
-                    "type": "string"
-                },
-                "fatherName": {
-                    "type": "string"
-                },
-                "degreeName": {
-                    "type": "string"
-                },
-                "graduationYear": {
-                    "type": "string"
-                },
-                "cgpa": {
+                "completionYear": {
                     "type": "string"
                 },
                 "courseName": {
                     "type": "string"
                 },
-                "headOfDepartment": {
-                    "type": "string"
-                },
-                "department": {
-                    "type": "string"
-                },
-                "address": {
-                    "type": "string"
-                },
-                "completionYear": {
+                "departmentName": {
                     "type": "string"
                 },
                 "enrollmentNumber": {
+                    "type": "string"
+                },
+                "fatherName": {
+                    "type": "string"
+                },
+                "headOfDepartment": {
+                    "type": "string"
+                },
+                "rollNumber": {
+                    "type": "string"
+                },
+                "cgpa": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                },
+                "userName": {
                     "type": "string"
                 }
             },
             "required": [
                 "id",
                 "userName",
+                "enrollmentNumber",
                 "rollNumber",
-                "session"
+                "session",
+                "competitionName",
+                "completionYear"
             ]
         }
     },
