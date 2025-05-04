@@ -68,7 +68,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "MigrationCertificate2Information"
+                        "MigrationCertificateInformation"
                     ]
                 },
                 "courseName": {
