@@ -67,7 +67,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "UniversityDegree2Information"
+                        "UniversityDegreeInformation"
                     ]
                 },
                 "affiliationNumber": {
