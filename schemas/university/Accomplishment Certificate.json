@@ -71,7 +71,7 @@
                 "type": {
                     "type": "string",
                     "enum": [
-                        "AccomplishmentCertificate2Information"
+                        "AccomplishmentInformation"
                     ]
                 },
                 "userName": {
