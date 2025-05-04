@@ -65,7 +65,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "enum": ["SportsCertificate2Information"]
+                    "enum": ["SportsCertificateInformation"]
                 },
                 "sportName": {
                     "type": "string"
