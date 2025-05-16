@@ -51,9 +51,10 @@
               "eventName": { "type": "string" },
               "eventDate": { "type": "string"},
               "location": { "type": "string"},
-              "address": { "type": "string"}
+              "address": { "type": "string"},
+              "department": { "type": "string"}
           },
-          "required": ["id", "type", "userName", "eventName", "deanName", "eventName", "eventDate", "location", "address"]
+          "required": ["id", "type", "userName", "eventName", "deanName", "eventName", "eventDate", "location", "address", "department"]
       }
   },
   "required": ["@context", "id", "type", "issuer", "validFrom", "credentialSubject"]
