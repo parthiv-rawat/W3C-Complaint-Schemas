@@ -98,9 +98,6 @@
                 "courseName": {
                     "type": "string"
                 },
-                "branch": {
-                    "type": "string"
-                },
                 "session": {
                     "type": "string"
                 },
@@ -130,7 +127,6 @@
                 "passoutYear",
                 "rank",
                 "session",
-                "branch",
                 "enrollmentNumber",
                 "location",
                 "address"
