@@ -99,6 +99,9 @@
                 },
                 "userName": {
                     "type": "string"
+                },
+                "address": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -108,7 +111,8 @@
                 "rollNumber",
                 "session",
                 "competitionName",
-                "completionYear"
+                "completionYear",
+                "address"
             ]
         }
     },
